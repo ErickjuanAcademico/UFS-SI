@@ -1,6 +1,7 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Bem vindo ao guia do projeto Urna eletronica
+Integrantes: Erick Juan e João Pedro Brandão.
 
 ## Folder Structure
 
