@@ -22,6 +22,8 @@ public class Main_Screen {
         JFrame mainScreen = new JFrame("Login");
         mainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainScreen.setSize(1280,720);
+        mainScreen.setResizable(false);
+        mainScreen.setLocationRelativeTo(null);
 
         Image scaledBackgroundImage = background.getScaledInstance(mainScreen.getWidth(), mainScreen.getHeight(), Image.SCALE_SMOOTH);
 
@@ -30,6 +32,13 @@ public class Main_Screen {
 
         mainScreen.setVisible(true);
         mainScreen.add(label);
+        
+        
+        JButton confirmar = new JButton("Confirmar");
+        confirmar.setBounds(535, 542, 207, 60);
+        label.add(confirmar);
+
+        
 
 
 
