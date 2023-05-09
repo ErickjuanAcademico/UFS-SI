@@ -2,7 +2,7 @@ package GUI;
 
 public class Teste {
     public static void main(String[] args) {
-        MainScreen teste = new MainScreen();
+        Main_Screen teste = new Main_Screen();
     }
     
 }
