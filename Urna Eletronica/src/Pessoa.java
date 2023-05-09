@@ -13,8 +13,8 @@ public Pessoa(String nome, String codigo){
     this.nome = nome;
     this.codigo = codigo;
 }
-public void setChaveDeVoto(boolean chaveDeVoto) {
-    this.chaveDeVoto = chaveDeVoto;
+public void setChaveDeVotoTrue() {
+    this.chaveDeVoto = true;
 }
 public String getHash() {
     return hash;
