@@ -1,22 +1,31 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 
-public class MainScreen{
+public class MainScreen extends JFrame{
     public MainScreen(){
-        JFrame mainScreen = new JFrame("Login");
-        mainScreen.setVisible(true);
-        mainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        mainScreen.setResizable(false);
-        mainScreen.setLocationRelativeTo(null);
+        setTitle("Login");
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
 
-        ImageIcon background = new ImageIcon("\UrnaEletronica\src\Arquivos\Main_Screen.png");
-        JLabel label1 = new JLabel(background);
-        label1.setBounds(0, 0, background.getIconWidth(), background.getIconHeight());
-        mainScreen.getContentPane().add(label1);
-        mainScreen.setSize(background.getIconWidth(), background.getIconHeight());
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+
+        ImageIcon background = new ImageIcon(getClass().getResource("\\UrnaEletronica\\src\\GUI\\Main_Screen.png"));
+        Image image = background.getImage();
+        Image scaledImage = image.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+        ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+
+        JLabel label1 = new JLabel(scaledImageIcon);
+        label1.setBounds(0, 0, 800, 600);
+        panel.add(label1);
+        setContentPane(panel);
+        
     }
 
     
