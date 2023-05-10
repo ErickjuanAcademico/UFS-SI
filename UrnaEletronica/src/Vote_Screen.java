@@ -1,9 +1,5 @@
 
 
-<<<<<<< HEAD
-public class Vote_Screen {
-    
-=======
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -63,5 +59,4 @@ public class Vote_Screen implements ActionListener {
     public void actionPerformed(ActionEvent e){
 
     }
->>>>>>> 58e546398b3ec3a453c40ecaadd8317d41788424
 }
