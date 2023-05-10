@@ -52,13 +52,14 @@ public class Main_Screen implements ActionListener{
 
     }
     private String frase;
+    
     @Override
     public void actionPerformed(ActionEvent e){
         if(cadastro.getText().length()==11){
             frase = "Confirmado.";
             JOptionPane.showMessageDialog(null, frase, "Verificaçao", JOptionPane.INFORMATION_MESSAGE, null);
         } else{
-            frase = "Cadastro invalido.";
+            frase = "Codigo de Usuario invalido";
             JOptionPane.showMessageDialog(null, frase, "Verificaçao", JOptionPane.ERROR_MESSAGE, null);
         }
     }

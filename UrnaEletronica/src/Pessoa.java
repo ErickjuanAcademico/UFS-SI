@@ -1,10 +1,9 @@
-import Interfaces.iGerarHash;
+
 import Interfaces.iVotar;
 
-public abstract class Pessoa implements iVotar, iGerarHash{
+public abstract class Pessoa implements iVotar{
     private String nome;
     private String codigo;
-    private String hash;
     private boolean chaveDeVoto;
 
     
@@ -16,16 +15,13 @@ public Pessoa(String nome, String codigo){
 public void setChaveDeVotoTrue() {
     this.chaveDeVoto = true;
 }
-public String getHash() {
-    return hash;
-}
 public String getNome() {
     return nome;
 }
 public String getCodigo() {
     return codigo;
 }
-public boolean jaVotou(){
+public boolean getChaveDeVoto(){
     return this.chaveDeVoto;
 }
 }
