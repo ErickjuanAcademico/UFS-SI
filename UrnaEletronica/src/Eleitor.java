@@ -1,13 +1,15 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
+import Interfaces.iVotar;
 
 
 
-public class Eleitor extends Pessoa {
+public class Eleitor extends Pessoa implements iVotar {
     private String hash;
-    
-    ArrayList<Eleitor> eleitores = new ArrayList<Eleitor>();
     
     public String gerarHash(String texto) throws NoSuchAlgorithmException{
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -24,17 +26,68 @@ public class Eleitor extends Pessoa {
     }
 
 
-    public Eleitor(String nome, String codigo) throws NoSuchAlgorithmException{
+    public Eleitor(String nome, String codigo) throws NoSuchAlgorithmException, IOException{
         super(nome,codigo);
-        eleitores.add(this);
         this.hash = this.gerarHash(codigo);
+
+        BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
+        String line;
+        boolean objetoJaExiste = false;
+        while ((line = reader.readLine()) != null) {
+            String[] campos = line.split(",");
+            if (campos.length >= 2 && campos[1].equals(codigo)) {
+                // Objeto já existe no arquivo
+                objetoJaExiste = true;
+                break;
+            }
+        }
+        reader.close();
+        // Escrever objeto no arquivo, se ele ainda não existe
+        if (!objetoJaExiste) {
+            FileWriter writer = new FileWriter("UrnaEletronica\\src\\Eleitores.txt", true);
+            writer.write(nome + "," + codigo + "," + hash + "," + getChaveDeVoto() + "\n");
+            writer.close();
+        }
     }
     public String getHash() {
         return hash;
     }
-
-    public void votar(){
-        System.out.println("aeiou");
+    public boolean chaveJaUtilizada() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] campos = line.split(",");
+            if (campos.length >= 2 && campos[1].equals(this.getCodigo()) && campos[3].equals("true")) {
+                // Chave já utilizada
+                reader.close();
+                return true;
+            }
+        }
+        reader.close();
+        // Chave ainda não utilizada
+        return false;
+    }
+    
+    public void atualizarChaveDeVoto() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
+        StringBuilder lines = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] campos = line.split(",");
+            if (campos.length >= 2 && campos[1].equals(this.getCodigo())) {
+                line = line.replace(",false", ",true");
+            }
+            lines.append(line).append("\n");
+        }
+        reader.close();
+    
+        FileWriter writer = new FileWriter("UrnaEletronica\\src\\Eleitores.txt");
+        writer.write(lines.toString());
+        writer.close();
+    }
+    
+    public void votar(String codigo){
+        System.out.println("123");
     }
 }
 

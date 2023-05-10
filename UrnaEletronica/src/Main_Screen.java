@@ -1,4 +1,4 @@
-package GUI;
+
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,6 +7,8 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 import javax.imageio.ImageIO;
 
 
@@ -54,14 +56,21 @@ public class Main_Screen implements ActionListener{
     private String frase;
     
     @Override
-    public void actionPerformed(ActionEvent e){
-        if(cadastro.getText().length()==11){
-            frase = "Confirmado.";
-            JOptionPane.showMessageDialog(null, frase, "Verificaçao", JOptionPane.INFORMATION_MESSAGE, null);
-        } else{
-            frase = "Codigo de Usuario invalido";
-            JOptionPane.showMessageDialog(null, frase, "Verificaçao", JOptionPane.ERROR_MESSAGE, null);
+public void actionPerformed(ActionEvent e){
+    String cpf = cadastro.getText();
+
+    try {
+        Eleitor eleitor = new Eleitor("", cpf); // criar um objeto Eleitor para verificar a chave de voto
+        if (eleitor.chaveJaUtilizada()) {
+            JOptionPane.showMessageDialog(null, "Você já votou!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+        } else {
+            // Eleitor ainda pode votar
+            // chamar a tela de votação aqui
+            eleitor.atualizarChaveDeVoto(); // atualizar a chave de voto para "true"
         }
+    } catch (NoSuchAlgorithmException | IOException erro) {
+        JOptionPane.showMessageDialog(null, "Erro ao verificar a chave de voto!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
     }
+}
     
 }

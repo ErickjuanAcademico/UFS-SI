@@ -1,7 +1,7 @@
 
 import Interfaces.iVotar;
 
-public abstract class Pessoa implements iVotar{
+public abstract class Pessoa{
     private String nome;
     private String codigo;
     private boolean chaveDeVoto;
