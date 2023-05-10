@@ -68,8 +68,12 @@ public void actionPerformed(ActionEvent e){
             // chamar a tela de votação aqui
             eleitor.atualizarChaveDeVoto(); // atualizar a chave de voto para "true"
         }
+<<<<<<< HEAD
     } catch (NoSuchAlgorithmException | IOException erro) {
         JOptionPane.showMessageDialog(null, "Erro ao verificar a chave de voto!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+=======
+        
+>>>>>>> 58e546398b3ec3a453c40ecaadd8317d41788424
     }
 }
     
