@@ -30,7 +30,7 @@ public class Main_Screen implements ActionListener{
         JLabel label = new JLabel();
 
         JFrame mainScreen = new JFrame("Login");
-        mainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainScreen.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         mainScreen.setSize(1280,720);
         mainScreen.setResizable(false);
         mainScreen.setLocationRelativeTo(null);
@@ -88,6 +88,7 @@ public class Main_Screen implements ActionListener{
                 } else {
                     // Eleitor ainda pode votar
                     // chamar a tela de votação aqui
+                    Teste2.main(null);
                     eleitor.atualizarChaveDeVoto();
                 }
             } catch (NoSuchAlgorithmException | IOException erro) {
