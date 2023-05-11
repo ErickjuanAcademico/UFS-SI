@@ -4,11 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import Interfaces.iVotar;
 
-
-
-public class Eleitor extends Pessoa implements iVotar {
+public class Eleitor extends Pessoa{
     private String hash;
     
     public String gerarHash(String texto) throws NoSuchAlgorithmException{
@@ -31,6 +28,7 @@ public class Eleitor extends Pessoa implements iVotar {
         super(nome,codigo);
         this.hash = this.gerarHash(codigo);
 
+        /* Verifica se o objeto a ser criado ja existe no arquivo txt para evitar que seja adicionado uma repetição do mesmo eleitor */
         BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
         String line;
         boolean objetoJaExiste = false;
@@ -53,7 +51,8 @@ public class Eleitor extends Pessoa implements iVotar {
     public String getHash() {
         return hash;
     }
-    public boolean chaveJaUtilizada() throws IOException {
+    public boolean chaveJaUtilizada() throws IOException { 
+        /*lê o arquivo de eleitores e retorna a chave de voto (true ou false) do eleitor selecionado pelo codigo*/
         BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -70,6 +69,7 @@ public class Eleitor extends Pessoa implements iVotar {
     }
     
     public void atualizarChaveDeVoto() throws IOException {
+        /*Atualiza a chave de voto do eleitor selecionado para true logo*/
         BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
         StringBuilder lines = new StringBuilder();
         String line;
@@ -85,10 +85,6 @@ public class Eleitor extends Pessoa implements iVotar {
         FileWriter writer = new FileWriter("UrnaEletronica\\src\\Eleitores.txt");
         writer.write(lines.toString());
         writer.close();
-    }
-
-    public void votar(String codigo){
-        System.out.println("123");
     }
 }
 

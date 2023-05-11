@@ -1,9 +1,6 @@
-
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,13 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.imageio.ImageIO;
 
 
 
 public class Main_Screen implements ActionListener{
     JTextField cadastro;
+    static JFrame mainScreen;
+
+    public static JFrame getMainScreen() {
+        return mainScreen;
+    }
     public Main_Screen(){
         BufferedImage background = null;
 
@@ -29,7 +30,7 @@ public class Main_Screen implements ActionListener{
         }
         JLabel label = new JLabel();
 
-        JFrame mainScreen = new JFrame("Login");
+        mainScreen = new JFrame("Login");
         mainScreen.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         mainScreen.setSize(1280,720);
         mainScreen.setResizable(false);
@@ -87,10 +88,10 @@ public class Main_Screen implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Você já votou!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
                 } else {
                     // Eleitor ainda pode votar
-                    // chamar a tela de votação aqui
-                    Vote_Screen voteScreen = new Vote_Screen();
-                    mainScreen.setVisible(true);
-                    eleitor.atualizarChaveDeVoto();        
+                    mainScreen.setVisible(false);
+                    // chama a tela de votação aqui
+                    Vote_Screen voteScreen = new Vote_Screen(cpf);
+                       
                 }
             } catch (NoSuchAlgorithmException | IOException erro) {
                 JOptionPane.showMessageDialog(null, "Erro ao verificar a chave de voto!", "Verificação", JOptionPane.ERROR_MESSAGE, null);

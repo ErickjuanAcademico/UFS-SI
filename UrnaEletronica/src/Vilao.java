@@ -65,6 +65,7 @@ public class Vilao extends Pessoa implements Serializable, iReceberVoto {
                 int novoVoto = Integer.parseInt(campos[3]) + 1;
                 String novaLinha = campos[0] + "," + campos[1] + "," + campos[2] + "," + novoVoto;
                 line = novaLinha;
+                this.receberVoto();
 
             }
             lines.append(line).append("\n");

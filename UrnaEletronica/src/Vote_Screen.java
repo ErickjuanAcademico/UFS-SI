@@ -14,9 +14,14 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JOptionPane;
 
+
+
 public class Vote_Screen implements ActionListener {
     JTextField codigo;
-    public Vote_Screen(){
+    private String codigoEleitor;
+    public Vote_Screen(String cpf){
+        this.codigoEleitor = cpf;
+
         JFrame telaVotos = new JFrame("Votar");
         telaVotos.setVisible(true);
         telaVotos.setSize(800, 500);
@@ -66,7 +71,9 @@ public class Vote_Screen implements ActionListener {
         codigo.setEditable(false);
         telaVotos.add(codigo);
 
-
+    }
+    public String getCodigoEleitor() {
+        return codigoEleitor;
     }
     private void teste1(ActionEvent actionEvent){
         codigo.setText("666");
@@ -91,10 +98,13 @@ public class Vote_Screen implements ActionListener {
     public void actionPerformed(ActionEvent e){
         try {
             Vilao vilao = new Vilao("getNome", codigo.getText());
+            Eleitor eleitor = new Eleitor("getNome",getCodigoEleitor());
             vilao.atualizarVoto();
             JOptionPane.showMessageDialog(null, "Voto computado!", "Confirmaçao", JOptionPane.INFORMATION_MESSAGE, null);
             JFrame telaVotos = (JFrame) SwingUtilities.getWindowAncestor((JButton) e.getSource());
+            eleitor.atualizarChaveDeVoto();
             telaVotos.dispose();
+            Main_Screen.getMainScreen().setVisible(true);
         } catch (NoSuchAlgorithmException | IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
