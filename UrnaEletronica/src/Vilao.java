@@ -1,22 +1,25 @@
 import Interfaces.iReceberVoto;
 
-public class Vilao extends Pessoa implements iReceberVoto{
+import java.io.Serializable;
+
+public class Vilao implements Serializable, iReceberVoto {
     private String nome;
     private int votos;
-    private String Hash;
 
+    public Vilao(String nome) {
+        this.nome = nome;
+        this.votos = 0;
+    }
 
-public Vilao(String nome, String codigo){
-    super(nome,codigo);
-    this.votos = 0;
+    public void receberVoto() {
+        this.votos++;
+    }
 
-}
-@Override
-public void receberVoto(){
-    this.votos += 1;
-}
-public void setVotos(int votos) {
-    this.votos = votos;
-}
+    public String getNome() {
+        return nome;
+    }
 
+    public int getVotos() {
+        return votos;
+    }
 }
