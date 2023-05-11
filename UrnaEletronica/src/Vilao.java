@@ -8,6 +8,7 @@ public class Vilao extends Pessoa implements iReceberVoto{
 
 public Vilao(String nome, String codigo){
     super(nome,codigo);
+    this.votos = 0;
 
 }
 @Override

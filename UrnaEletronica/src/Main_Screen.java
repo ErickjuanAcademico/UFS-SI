@@ -3,7 +3,10 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -55,22 +58,43 @@ public class Main_Screen implements ActionListener{
     }
     private String frase;
     
-    @Override
-public void actionPerformed(ActionEvent e){
-    String cpf = cadastro.getText();
-
-    try {
-        Eleitor eleitor = new Eleitor("", cpf); // criar um objeto Eleitor para verificar a chave de voto
-        if (eleitor.chaveJaUtilizada()) {
-            JOptionPane.showMessageDialog(null, "Você já votou!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
-        } else {
-            // Eleitor ainda pode votar
-            // chamar a tela de votação aqui
-            eleitor.atualizarChaveDeVoto(); // atualizar a chave de voto para "true"
+    private boolean cpfExiste(String cpf) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
+            String linha = reader.readLine();
+            while (linha != null) {
+                if (linha.split(",")[1].equals(cpf)) {
+                    reader.close();
+                    return true;
+                }
+                linha = reader.readLine();
+            }
+            reader.close();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
-    } catch (NoSuchAlgorithmException | IOException erro) {
-        JOptionPane.showMessageDialog(null, "Erro ao verificar a chave de voto!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
     }
-}
     
+    public void actionPerformed(ActionEvent e) {
+        String cpf = cadastro.getText();
+    
+        if (cpfExiste(cpf)) {
+            try {
+                Eleitor eleitor = new Eleitor("getNome", cpf);
+                if (eleitor.chaveJaUtilizada()) {
+                    JOptionPane.showMessageDialog(null, "Você já votou!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+                } else {
+                    // Eleitor ainda pode votar
+                    // chamar a tela de votação aqui
+                    eleitor.atualizarChaveDeVoto();
+                }
+            } catch (NoSuchAlgorithmException | IOException erro) {
+                JOptionPane.showMessageDialog(null, "Erro ao verificar a chave de voto!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "CPF não cadastrado!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+        }
+    }
 }
