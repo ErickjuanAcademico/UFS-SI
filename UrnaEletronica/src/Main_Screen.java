@@ -88,7 +88,7 @@ public class Main_Screen implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Você já votou!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
                 } else {
                     // Eleitor ainda pode votar
-                    mainScreen.setVisible(false);
+                    mainScreen.dispose();
                     // chama a tela de votação aqui
                     Vote_Screen voteScreen = new Vote_Screen(cpf);
                        
