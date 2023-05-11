@@ -13,7 +13,13 @@ public class TesteMain {
         Eleitor teste8 = new Eleitor("Augusto Cesar", "13848007002");
         Eleitor teste9 = new Eleitor("Kalil Bispo", "38431895012");
         Eleitor teste10 = new Eleitor("Naruto Uzumaki", "43989012053");
-        Eleitor teste11 = new Eleitor("Sasuke Uchiha", "83359025016");    
+        Eleitor teste11 = new Eleitor("Sasuke Uchiha", "83359025016");
+        Vilao v1 = new Vilao("Darth Vader", "666");
+        Vilao v2 = new Vilao("Coringa", "888");
+        Vilao v3 = new Vilao("Voldemort", "111");
+        Vilao v4 = new Vilao("Satanas", "333");
+        Vilao v5 = new Vilao("Dr. Octopus", "777");
+        Vilao v6 = new Vilao("Thanos", "999");  
     }
 
 }

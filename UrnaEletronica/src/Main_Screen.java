@@ -58,12 +58,12 @@ public class Main_Screen implements ActionListener{
     }
     private String frase;
     
-    private boolean cpfExiste(String cpf) {
+    private boolean codigoExiste(String codigo) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
             String linha = reader.readLine();
             while (linha != null) {
-                if (linha.split(",")[1].equals(cpf)) {
+                if (linha.split(",")[1].equals(codigo)) {
                     reader.close();
                     return true;
                 }
@@ -80,7 +80,7 @@ public class Main_Screen implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String cpf = cadastro.getText();
     
-        if (cpfExiste(cpf)) {
+        if (codigoExiste(cpf)) {
             try {
                 Eleitor eleitor = new Eleitor("getNome", cpf);
                 if (eleitor.chaveJaUtilizada()) {
@@ -88,8 +88,9 @@ public class Main_Screen implements ActionListener{
                 } else {
                     // Eleitor ainda pode votar
                     // chamar a tela de votação aqui
-                    Teste2.main(null);
-                    eleitor.atualizarChaveDeVoto();
+                    Vote_Screen voteScreen = new Vote_Screen();
+                    mainScreen.setVisible(true);
+                    eleitor.atualizarChaveDeVoto();        
                 }
             } catch (NoSuchAlgorithmException | IOException erro) {
                 JOptionPane.showMessageDialog(null, "Erro ao verificar a chave de voto!", "Verificação", JOptionPane.ERROR_MESSAGE, null);

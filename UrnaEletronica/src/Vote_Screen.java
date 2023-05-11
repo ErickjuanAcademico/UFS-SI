@@ -3,8 +3,15 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 import javax.swing.JOptionPane;
 
 public class Vote_Screen implements ActionListener {
@@ -82,7 +89,19 @@ public class Vote_Screen implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-        JOptionPane.showMessageDialog(null, "Voto computado!", "Confirmaçao", JOptionPane.INFORMATION_MESSAGE, null);
+        try {
+            Vilao vilao = new Vilao("getNome", codigo.getText());
+            vilao.atualizarVoto();
+            JOptionPane.showMessageDialog(null, "Voto computado!", "Confirmaçao", JOptionPane.INFORMATION_MESSAGE, null);
+            JFrame telaVotos = (JFrame) SwingUtilities.getWindowAncestor((JButton) e.getSource());
+            telaVotos.dispose();
+        } catch (NoSuchAlgorithmException | IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        
+        
+                }
 
     }
-}
+

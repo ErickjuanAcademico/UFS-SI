@@ -25,7 +25,8 @@ public class Eleitor extends Pessoa implements iVotar {
         return hexString.toString();
     }
 
-
+    public Eleitor(){}
+    
     public Eleitor(String nome, String codigo) throws NoSuchAlgorithmException, IOException{
         super(nome,codigo);
         this.hash = this.gerarHash(codigo);
@@ -85,7 +86,7 @@ public class Eleitor extends Pessoa implements iVotar {
         writer.write(lines.toString());
         writer.close();
     }
-    
+
     public void votar(String codigo){
         System.out.println("123");
     }

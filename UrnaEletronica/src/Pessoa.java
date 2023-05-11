@@ -6,6 +6,7 @@ public abstract class Pessoa{
     private String codigo;
     private boolean chaveDeVoto;
 
+public Pessoa(){}
     
 public Pessoa(String nome, String codigo){
     this.chaveDeVoto = false;
