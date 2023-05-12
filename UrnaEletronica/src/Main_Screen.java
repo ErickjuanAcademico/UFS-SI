@@ -14,7 +14,9 @@ import javax.imageio.ImageIO;
 
 public class Main_Screen implements ActionListener{
     JTextField cadastro;
+    JTextField senha;
     static JFrame mainScreen;
+
 
     public static JFrame getMainScreen() {
         return mainScreen;
@@ -49,15 +51,37 @@ public class Main_Screen implements ActionListener{
         confirmar.setBounds(535, 542, 207, 60);
         label.add(confirmar);
 
-        confirmar.addActionListener(this);
-        
+        JButton finalizar = new JButton("Finalizar");
+        finalizar.setBounds(950, 350, 100, 30);
+        label.add(finalizar);
+
         cadastro = new JTextField();
         cadastro.setBounds(430, 442, 420, 45);
 
         label.add(cadastro);
 
+        senha = new JTextField();
+        senha.setBounds(900, 315, 200, 30);
+        senha.setEditable(true);
+        senha.setVisible(true);
+
+        label.add(senha);
+
+        finalizar.addActionListener(this::mostrar);
+        confirmar.addActionListener(this);
+
     }
     private String frase;
+
+    public void mostrar(ActionEvent actionEvent){
+        if(senha.getText().equals("123")){
+            //chamar tela de vencedor
+            mainScreen.dispose();
+            Final_Screen finalScreen = new Final_Screen();
+        } else {
+            JOptionPane.showMessageDialog(null, "Senha Errada!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+        }
+    }
     
     private boolean codigoExiste(String codigo) {
         try {
