@@ -116,7 +116,7 @@ public class Vote_Screen extends JFrame implements ActionListener{
             Eleitor eleitor = new Eleitor("getNome",getCodigoEleitor());
             vilao.atualizarVoto();
             FileWriter writer = new FileWriter("UrnaEletronica\\src\\Votos.txt", true);
-            writer.write(eleitor.getCodigo() + "," + vilao.getCodigo() + "\n");
+            writer.write(eleitor.getCodigo() + "," + vilao.getCodigo() + "," + eleitor.gerarHash(eleitor.getCodigo() + vilao.getCodigo()) + "\n");
             writer.close();
             JOptionPane.showMessageDialog(null, "Voto computado!", "Confirmaçao", JOptionPane.INFORMATION_MESSAGE, null);
             JFrame telaVotos = (JFrame) SwingUtilities.getWindowAncestor((JButton) e.getSource());

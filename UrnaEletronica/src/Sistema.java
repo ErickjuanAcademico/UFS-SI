@@ -6,12 +6,7 @@ import java.util.ArrayList;
       que necessitar. */
 public class Sistema {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        FileWriter clearEleitores = new FileWriter("UrnaEletronica\\src\\Eleitores.txt", false);
-         clearEleitores.write("");
-         clearEleitores.close();
-        FileWriter clearViloes = new FileWriter("UrnaEletronica\\src\\Viloes.txt", false);
-        clearViloes.write("");
-        clearViloes.close(); 
+
          
         Eleitor eleitor1 = new Eleitor("Erick Juan", "04809622517");
         Eleitor eleitor2 = new Eleitor("Savio Luan", "03767112051"); 

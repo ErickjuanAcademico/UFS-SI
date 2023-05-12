@@ -2,8 +2,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -80,8 +82,49 @@ public class Main_Screen implements ActionListener{
     private String frase;
 
     public void recomeçar(ActionEvent actionEvent) {
-        //metodo para resetar a votação
-        
+
+        try {
+            //Limpa o arquivo de Votos.
+            
+            FileWriter clearVotos = new FileWriter("UrnaEletronica\\src\\Votos.txt", false);
+            clearVotos.write("");
+            clearVotos.close();
+            
+            //Reseta todas as chaves de voto para false.
+            
+            BufferedReader readerEleitores = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
+            StringBuilder linesEleitores = new StringBuilder();
+            String line;
+            while ((line = readerEleitores.readLine()) != null) {
+                String[] campos = line.split(",");
+                String novaLinha = campos[0] + "," + campos[1] + "," + campos[2] + "," + "false";
+                line = novaLinha;
+                linesEleitores.append(line).append("\n");
+            }
+            readerEleitores.close();
+            FileWriter writerEleitores = new FileWriter("UrnaEletronica\\src\\Eleitores.txt");
+            writerEleitores.write(linesEleitores.toString());
+            writerEleitores.close();
+            
+            //Reseta a quantidade de votos dos vilões.
+            
+            BufferedReader readerViloes = new BufferedReader(new FileReader("UrnaEletronica\\src\\Viloes.txt"));
+            StringBuilder linesViloes = new StringBuilder();
+            String lineViloes;
+            while ((line = readerViloes.readLine()) != null) {
+                String[] campos = line.split(",");
+                String novaLinha = campos[0] + "," + campos[1] + "," + campos[2] + "," + "0";
+                line = novaLinha;
+                linesViloes.append(line).append("\n");
+            }
+            readerViloes.close();
+            FileWriter writerViloes = new FileWriter("UrnaEletronica\\src\\Viloes.txt");
+            writerViloes.write(linesViloes.toString());
+            writerViloes.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void mostrar(ActionEvent actionEvent){
