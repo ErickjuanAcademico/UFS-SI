@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javax.imageio.ImageIO;
 
-public class Final_Screen implements ActionListener{
+public class Final_Screen{
 
     JLabel venceu;
     
@@ -19,7 +19,7 @@ public class Final_Screen implements ActionListener{
         JFrame telaFinal = new JFrame("Quem venceu?");
         telaFinal.setVisible(true);
         telaFinal.setSize(800, 500);
-        telaFinal.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        telaFinal.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         telaFinal.setLocationRelativeTo(null);
         telaFinal.setResizable(false);
         telaFinal.setLayout(null);
@@ -27,19 +27,10 @@ public class Final_Screen implements ActionListener{
         venceu = new JLabel("placeholder!!");
         venceu.setBounds(200, 200, 500, 100);
         venceu.setFont(new Font("Arial", Font.BOLD, 70));
-        venceu.setVisible(false);
+        venceu.setVisible(true);
         telaFinal.add(venceu);
 
 
-        JButton revelar = new JButton("Mostrar vencedor");
-        revelar.setBounds(325, 75, 150, 50);
-        telaFinal.add(revelar);
-
-        revelar.addActionListener(this);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //colocar o vencedor no label
-        venceu.setVisible(true);
-    }
+    
 }
