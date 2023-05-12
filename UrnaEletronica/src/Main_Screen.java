@@ -55,6 +55,11 @@ public class Main_Screen implements ActionListener{
         finalizar.setBounds(950, 350, 100, 30);
         label.add(finalizar);
 
+        JButton resetar = new JButton("recomeçar");
+        resetar.setBounds(150, 350, 100, 30);
+        label.add(resetar);
+
+
         cadastro = new JTextField();
         cadastro.setBounds(430, 442, 420, 45);
 
@@ -69,9 +74,15 @@ public class Main_Screen implements ActionListener{
 
         finalizar.addActionListener(this::mostrar);
         confirmar.addActionListener(this);
+        resetar.addActionListener(this::recomeçar);
 
     }
     private String frase;
+
+    public void recomeçar(ActionEvent actionEvent) {
+        //metodo para resetar a votação
+        
+    }
 
     public void mostrar(ActionEvent actionEvent){
         if(senha.getText().equals("123")){
