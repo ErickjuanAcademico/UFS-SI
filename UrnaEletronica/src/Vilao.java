@@ -11,7 +11,6 @@ import java.security.NoSuchAlgorithmException;
 public class Vilao extends Pessoa implements Serializable, iReceberVoto {
     private String nome;
     private int votos;
-    private String hash;
 
     public Vilao(String nome) {
         this.nome = nome;
@@ -34,7 +33,6 @@ public class Vilao extends Pessoa implements Serializable, iReceberVoto {
 
     public Vilao(String nome, String codigo) throws NoSuchAlgorithmException, IOException{
         super(nome,codigo);
-        this.hash = this.gerarHash(codigo);
 
         BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Viloes.txt"));
         String line;
@@ -51,7 +49,7 @@ public class Vilao extends Pessoa implements Serializable, iReceberVoto {
         // Escrever objeto no arquivo, se ele ainda não existe
         if (!objetoJaExiste) {
             FileWriter writer = new FileWriter("UrnaEletronica\\src\\Viloes.txt", true);
-            writer.write(nome + "," + codigo + "," + hash + "," + votos + "\n");
+            writer.write(nome + "," + codigo + "," + gerarHash(getNome() + getCodigo()) + "," + votos + "\n");
             writer.close();
         }
     }

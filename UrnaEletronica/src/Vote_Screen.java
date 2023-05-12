@@ -7,8 +7,11 @@ import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -16,7 +19,7 @@ import javax.swing.JOptionPane;
 
 
 
-public class Vote_Screen implements ActionListener {
+public class Vote_Screen extends JFrame implements ActionListener{
     JTextField codigo;
     private String codigoEleitor;
     public Vote_Screen(String cpf){
@@ -28,6 +31,13 @@ public class Vote_Screen implements ActionListener {
         telaVotos.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         telaVotos.setLocationRelativeTo(null);
         telaVotos.setResizable(false);
+        telaVotos.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                Main_Screen.getMainScreen().setVisible(true);
+                telaVotos.dispose();
+            }
+        });
         telaVotos.setLayout(null);
 
         JButton votar = new JButton("Vote!");
@@ -71,6 +81,8 @@ public class Vote_Screen implements ActionListener {
         codigo.setEditable(false);
         telaVotos.add(codigo);
 
+        
+
     }
     public String getCodigoEleitor() {
         return codigoEleitor;
@@ -93,6 +105,9 @@ public class Vote_Screen implements ActionListener {
     private void teste6(ActionEvent actionEvent){
         codigo.setText("333");
     }
+    
+    
+
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -100,6 +115,9 @@ public class Vote_Screen implements ActionListener {
             Vilao vilao = new Vilao("getNome", codigo.getText());
             Eleitor eleitor = new Eleitor("getNome",getCodigoEleitor());
             vilao.atualizarVoto();
+            FileWriter writer = new FileWriter("UrnaEletronica\\src\\Votos.txt", true);
+            writer.write(eleitor.getCodigo() + "," + vilao.getCodigo() + "\n");
+            writer.close();
             JOptionPane.showMessageDialog(null, "Voto computado!", "Confirmaçao", JOptionPane.INFORMATION_MESSAGE, null);
             JFrame telaVotos = (JFrame) SwingUtilities.getWindowAncestor((JButton) e.getSource());
             eleitor.atualizarChaveDeVoto();

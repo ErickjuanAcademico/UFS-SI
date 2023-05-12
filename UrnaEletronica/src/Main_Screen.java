@@ -33,7 +33,7 @@ public class Main_Screen implements ActionListener{
         JLabel label = new JLabel();
 
         mainScreen = new JFrame("Login");
-        mainScreen.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        mainScreen.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         mainScreen.setSize(1280,720);
         mainScreen.setResizable(false);
         mainScreen.setLocationRelativeTo(null);

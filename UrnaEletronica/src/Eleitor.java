@@ -6,7 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Eleitor extends Pessoa{
-    private String hash;
     
     public String gerarHash(String texto) throws NoSuchAlgorithmException{
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -26,7 +25,6 @@ public class Eleitor extends Pessoa{
     
     public Eleitor(String nome, String codigo) throws NoSuchAlgorithmException, IOException{
         super(nome,codigo);
-        this.hash = this.gerarHash(codigo);
 
         /* Verifica se o objeto a ser criado ja existe no arquivo txt para evitar que seja adicionado uma repetição do mesmo eleitor */
         BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
@@ -44,13 +42,12 @@ public class Eleitor extends Pessoa{
         // Escrever objeto no arquivo, se ele ainda não existe
         if (!objetoJaExiste) {
             FileWriter writer = new FileWriter("UrnaEletronica\\src\\Eleitores.txt", true);
-            writer.write(nome + "," + codigo + "," + hash + "," + getChaveDeVoto() + "\n");
+            writer.write(nome + "," + codigo + "," + gerarHash((getNome() + getCodigo())) + "," + getChaveDeVoto() + "\n");
             writer.close();
         }
     }
-    public String getHash() {
-        return hash;
-    }
+
+    
     public boolean chaveJaUtilizada() throws IOException { 
         /*lê o arquivo de eleitores e retorna a chave de voto (true ou false) do eleitor selecionado pelo codigo*/
         BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
