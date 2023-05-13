@@ -40,7 +40,7 @@ public class Vote_Screen extends JFrame implements ActionListener{
         });
         telaVotos.setLayout(null);
 
-        JButton votar = new JButton("Vote!");
+        JButton votar = new JButton("Votar");
         votar.setBounds(325, 380, 150, 50);
         telaVotos.add(votar);
 

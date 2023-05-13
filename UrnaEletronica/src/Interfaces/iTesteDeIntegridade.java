@@ -1,6 +1,6 @@
 package Interfaces;
 public interface iTesteDeIntegridade {
-    public void verificarDados();
+    public void verificarHash();
     public void verificarArquivos();
     
 }

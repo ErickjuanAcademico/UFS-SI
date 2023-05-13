@@ -57,8 +57,8 @@ public class Main_Screen implements ActionListener{
         finalizar.setBounds(950, 350, 100, 30);
         label.add(finalizar);
 
-        JButton resetar = new JButton("recomeçar");
-        resetar.setBounds(150, 350, 100, 30);
+        JButton resetar = new JButton("Reiniciar Eleição");
+        resetar.setBounds(150, 350, 150, 30);
         label.add(resetar);
 
 
@@ -74,11 +74,14 @@ public class Main_Screen implements ActionListener{
 
         label.add(senha);
 
-        finalizar.addActionListener(this::mostrar);
+        finalizar.addActionListener(this::finalizar);
         confirmar.addActionListener(this);
         resetar.addActionListener(this::recomeçar);
 
     }
+
+    Eleicao eleicao = new Eleicao();
+
     private String frase;
 
     public void recomeçar(ActionEvent actionEvent) {
@@ -121,22 +124,25 @@ public class Main_Screen implements ActionListener{
             FileWriter writerViloes = new FileWriter("UrnaEletronica\\src\\Viloes.txt");
             writerViloes.write(linesViloes.toString());
             writerViloes.close();
+            JOptionPane.showMessageDialog(null, "         Eleição reiniciada" + "\n" + "Todos os dados foram limpos.", "Verificação", JOptionPane.INFORMATION_MESSAGE, null);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void mostrar(ActionEvent actionEvent){
+    public void finalizar(ActionEvent actionEvent){
         if(senha.getText().equals("123")){
             //chamar tela de vencedor
             mainScreen.dispose();
             Final_Screen finalScreen = new Final_Screen();
-        } else {
+        }
+
+         else {
             JOptionPane.showMessageDialog(null, "Senha Errada!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
         }
     }
-    
+      
     private boolean codigoExiste(String codigo) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
