@@ -129,7 +129,7 @@ public class Vote_Screen extends JFrame implements ActionListener{
         }
         
         
-                }
-
     }
+
+}
 
