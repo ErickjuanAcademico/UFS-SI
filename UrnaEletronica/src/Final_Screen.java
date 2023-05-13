@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javax.imageio.ImageIO;
 
-public class Final_Screen{
+public class Final_Screen implements ActionListener{
 
     JLabel venceu1;
     JLabel venceu2;
@@ -18,6 +18,7 @@ public class Final_Screen{
     JLabel venceu4;
     JLabel venceu5;
     JLabel venceu6;
+    JButton mostrar;
     
     public Final_Screen(){
         BufferedImage imagem1 = null;
@@ -117,8 +118,13 @@ public class Final_Screen{
         venceu6.setIcon(vencedor6);
         venceu6.setVisible(false);
 
+        mostrar = new JButton("Mostrar Vencedor");
+        mostrar.setBounds(540, 300, 200, 50);
+        mostrar.setVisible(true);
+
         
         telaFinal.setVisible(true);
+        telaFinal.add(mostrar);
         telaFinal.add(venceu1);
         telaFinal.add(venceu2);
         telaFinal.add(venceu3);
@@ -126,8 +132,13 @@ public class Final_Screen{
         telaFinal.add(venceu5);
         telaFinal.add(venceu6);
         
-        
+        mostrar.addActionListener(this);
 
     }
-    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        venceu6.setVisible(true);
+        mostrar.setVisible(false);
+        
+    }
 }
