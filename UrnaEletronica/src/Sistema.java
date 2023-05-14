@@ -10,8 +10,8 @@ public class Sistema {
         
          
         Eleitor eleitor1 = new Eleitor("Erick Juan", "04809622517");
-        Eleitor eleitor2 = new Eleitor("Savio Luan", "03767112051"); 
-        Eleitor eleitor3 = new Eleitor("Joao Pedro", "82165783003");
+        Eleitor eleitor2 = new Eleitor("Savio Luan", "04809649555"); 
+        Eleitor eleitor3 = new Eleitor("Edenia Maria", "38684055500");
         Eleitor eleitor4 = new Eleitor("Gabriel Argolo", "91397641096");
         Eleitor eleitor5 = new Eleitor("Antonio Vitor", "73246716080");
         Eleitor eleitor6 = new Eleitor("Diogo Eduardo", "03865973086");
