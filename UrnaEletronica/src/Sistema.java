@@ -6,7 +6,8 @@ import java.util.ArrayList;
       que necessitar. */
 public class Sistema {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-
+        Seguranca seguranca = new Seguranca();
+        
          
         Eleitor eleitor1 = new Eleitor("Erick Juan", "04809622517");
         Eleitor eleitor2 = new Eleitor("Savio Luan", "03767112051"); 

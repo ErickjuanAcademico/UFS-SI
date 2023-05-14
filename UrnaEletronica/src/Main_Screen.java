@@ -20,6 +20,7 @@ public class Main_Screen implements ActionListener{
     static JFrame mainScreen;
 
     Eleicao eleicao = new Eleicao();
+    Seguranca seguranca = new Seguranca();
 
 
     public static JFrame getMainScreen() {
@@ -116,6 +117,7 @@ public class Main_Screen implements ActionListener{
                     mainScreen.dispose();
                     // chama a tela de votação aqui
                     Vote_Screen voteScreen = new Vote_Screen(cpf);
+                    System.out.println(seguranca.gerarHashArquivo("UrnaEletronica/src/Eleitores.txt"));
                        
                 }
             } catch (NoSuchAlgorithmException | IOException erro) {
