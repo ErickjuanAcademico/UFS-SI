@@ -19,6 +19,8 @@ public class Main_Screen implements ActionListener{
     JTextField senha;
     static JFrame mainScreen;
 
+    Eleicao eleicao = new Eleicao();
+
 
     public static JFrame getMainScreen() {
         return mainScreen;
@@ -80,55 +82,13 @@ public class Main_Screen implements ActionListener{
 
     }
 
-    Eleicao eleicao = new Eleicao();
+
 
     private String frase;
 
     public void recomeçar(ActionEvent actionEvent) {
-
-        try {
-            //Limpa o arquivo de Votos.
-            
-            FileWriter clearVotos = new FileWriter("UrnaEletronica\\src\\Votos.txt", false);
-            clearVotos.write("");
-            clearVotos.close();
-            
-            //Reseta todas as chaves de voto para false.
-            
-            BufferedReader readerEleitores = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
-            StringBuilder linesEleitores = new StringBuilder();
-            String line;
-            while ((line = readerEleitores.readLine()) != null) {
-                String[] campos = line.split(",");
-                String novaLinha = campos[0] + "," + campos[1] + "," + campos[2] + "," + "false";
-                line = novaLinha;
-                linesEleitores.append(line).append("\n");
-            }
-            readerEleitores.close();
-            FileWriter writerEleitores = new FileWriter("UrnaEletronica\\src\\Eleitores.txt");
-            writerEleitores.write(linesEleitores.toString());
-            writerEleitores.close();
-            
-            //Reseta a quantidade de votos dos vilões.
-            
-            BufferedReader readerViloes = new BufferedReader(new FileReader("UrnaEletronica\\src\\Viloes.txt"));
-            StringBuilder linesViloes = new StringBuilder();
-            String lineViloes;
-            while ((line = readerViloes.readLine()) != null) {
-                String[] campos = line.split(",");
-                String novaLinha = campos[0] + "," + campos[1] + "," + campos[2] + "," + "0";
-                line = novaLinha;
-                linesViloes.append(line).append("\n");
-            }
-            readerViloes.close();
-            FileWriter writerViloes = new FileWriter("UrnaEletronica\\src\\Viloes.txt");
-            writerViloes.write(linesViloes.toString());
-            writerViloes.close();
-            JOptionPane.showMessageDialog(null, "         Eleição reiniciada" + "\n" + "Todos os dados foram limpos.", "Verificação", JOptionPane.INFORMATION_MESSAGE, null);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        eleicao.resetarVotacao();
+        JOptionPane.showMessageDialog(null, "         Eleição reiniciada" + "\n" + "Todos os dados foram limpos.", "Verificação", JOptionPane.INFORMATION_MESSAGE, null);
     }
 
     public void finalizar(ActionEvent actionEvent){
@@ -143,29 +103,10 @@ public class Main_Screen implements ActionListener{
         }
     }
       
-    private boolean codigoExiste(String codigo) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("UrnaEletronica\\src\\Eleitores.txt"));
-            String linha = reader.readLine();
-            while (linha != null) {
-                if (linha.split(",")[1].equals(codigo)) {
-                    reader.close();
-                    return true;
-                }
-                linha = reader.readLine();
-            }
-            reader.close();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
     public void actionPerformed(ActionEvent e) {
         String cpf = cadastro.getText();
     
-        if (codigoExiste(cpf)) {
+        if (eleicao.codigoExiste(cpf)) {
             try {
                 Eleitor eleitor = new Eleitor("getNome", cpf);
                 if (eleitor.chaveJaUtilizada()) {

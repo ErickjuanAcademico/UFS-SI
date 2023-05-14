@@ -7,19 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Eleitor extends Pessoa{
     
-    public String gerarHash(String texto) throws NoSuchAlgorithmException{
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] hashBytes = digest.digest(texto.getBytes());
-        StringBuilder hexString = new StringBuilder();
-
-        for(byte b : hashBytes){
-            String hex = Integer.toHexString(0xff & b);
-            if(hex.length() == 1) hexString.append('0');
-            hexString.append(hex);    
-        }
-
-        return hexString.toString();
-    }
+    Seguranca seguranca = new Seguranca();
 
     public Eleitor(){}
     
@@ -42,7 +30,7 @@ public class Eleitor extends Pessoa{
         // Escrever objeto no arquivo, se ele ainda não existe
         if (!objetoJaExiste) {
             FileWriter writer = new FileWriter("UrnaEletronica\\src\\Eleitores.txt", true);
-            writer.write(nome + "," + codigo + "," + gerarHash((getNome() + getCodigo())) + "," + getChaveDeVoto() + "\n");
+            writer.write(nome + "," + codigo + "," + seguranca.gerarHash((getNome() + getCodigo())) + "," + getChaveDeVoto() + "\n");
             writer.close();
         }
     }

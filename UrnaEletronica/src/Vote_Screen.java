@@ -22,6 +22,10 @@ import javax.swing.JOptionPane;
 public class Vote_Screen extends JFrame implements ActionListener{
     JTextField codigo;
     private String codigoEleitor;
+
+    Seguranca seguranca = new Seguranca();
+    Eleicao eleicao = new Eleicao();
+
     public Vote_Screen(String cpf){
         this.codigoEleitor = cpf;
 
@@ -112,12 +116,9 @@ public class Vote_Screen extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         try {
-            Vilao vilao = new Vilao("getNome", codigo.getText());
+            Vilao vilao = new Vilao("getNome", codigo.getText(),"getCaminhoImagem");
             Eleitor eleitor = new Eleitor("getNome",getCodigoEleitor());
-            vilao.atualizarVoto();
-            FileWriter writer = new FileWriter("UrnaEletronica\\src\\Votos.txt", true);
-            writer.write(eleitor.getCodigo() + "," + vilao.getCodigo() + "," + eleitor.gerarHash(eleitor.getCodigo() + vilao.getCodigo()) + "\n");
-            writer.close();
+            eleicao.votar(eleitor, vilao, seguranca);
             JOptionPane.showMessageDialog(null, "Voto computado!", "Confirmaçao", JOptionPane.INFORMATION_MESSAGE, null);
             JFrame telaVotos = (JFrame) SwingUtilities.getWindowAncestor((JButton) e.getSource());
             eleitor.atualizarChaveDeVoto();
