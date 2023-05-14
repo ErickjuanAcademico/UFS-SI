@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 public class Eleicao {
     String vencedor;
     String viloes = "UrnaEletronica\\src\\Viloes.txt";
+    Arraylist empatesList = null;
     
     public Eleicao(){}
     public String revelarVencedor(){
@@ -30,9 +31,15 @@ public class Eleicao {
                     empates = new StringBuilder();
                 } else if (votos == maxVotos) {
                     qtdEmpates++;
-                    if (qtdEmpates == 1) {}
-                    empates.append(nome);
-                    empates.append(", ");
+                    empatesList.add(nome);
+                    
+                    if (qtdEmpates > 0) {
+                        for (String empate : empatesList) {
+                            empates.append(empate);
+                            empates.append(",");
+                        }
+                    
+                    }
                 }
             }
             reader.close();
@@ -44,9 +51,8 @@ public class Eleicao {
             return vencedor;
         } else {
             String empatesString = empates.toString();
-        if (empatesString.endsWith(", ")) {
-            empatesString = empatesString.substring(0, empatesString.length() - 2);
-        }
+
+        
         return empatesString;
         }
     }
