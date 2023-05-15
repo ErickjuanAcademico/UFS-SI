@@ -26,7 +26,7 @@ public class Final_Screen extends JFrame{
         }
         catch (IOException erro) {
             erro.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Eleição Empatada entre " + eleicao.revelarVencedor(), "Confirmaçao", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(null, "Eleição Empatada", "Confirmaçao", JOptionPane.ERROR_MESSAGE, null);
         }
         JLabel label = new JLabel();
 

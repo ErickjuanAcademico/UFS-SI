@@ -101,6 +101,7 @@ public class Main_Screen implements ActionListener{
 
          else {
             JOptionPane.showMessageDialog(null, "Senha Errada!", "Verificação", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
         }
     }
       

@@ -30,7 +30,7 @@ public class Eleitor extends Pessoa{
         // Escrever objeto no arquivo, se ele ainda não existe
         if (!objetoJaExiste) {
             FileWriter writer = new FileWriter("UrnaEletronica\\src\\Eleitores.txt", true);
-            writer.write(nome + "," + codigo + "," + seguranca.gerarHash((getNome() + getCodigo())) + "," + getChaveDeVoto() + "\n");
+            writer.write(nome + "," + codigo + "," + seguranca.gerarHash((nome + codigo)) + "," + getChaveDeVoto() + "\n");
             writer.close();
         }
     }

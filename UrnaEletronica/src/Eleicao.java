@@ -3,13 +3,23 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Eleicao {
+    Seguranca seguranca = new Seguranca();
     String vencedor;
     String viloes = "UrnaEletronica\\src\\Viloes.txt";
     Arraylist empatesList = null;
     
     public Eleicao(){}
+    
     public String revelarVencedor(){
         String line;
         int maxVotos = 0;
@@ -31,15 +41,13 @@ public class Eleicao {
                     empates = new StringBuilder();
                 } else if (votos == maxVotos) {
                     qtdEmpates++;
-                    empatesList.add(nome);
-                    
                     if (qtdEmpates > 0) {
-                        for (String empate : empatesList) {
-                            empates.append(empate);
+                            empates.append(nome);
                             empates.append(",");
-                        }
+                        
                     
                     }
+                    empates.append(nome);
                 }
             }
             reader.close();
@@ -123,6 +131,8 @@ public class Eleicao {
     
 
     public void votar(Eleitor eleitor, Vilao vilao, Seguranca seguranca) throws NoSuchAlgorithmException, IOException{
+        
+        
         FileWriter writerVotos = new FileWriter("UrnaEletronica\\src\\Votos.txt", true);
         writerVotos.write(eleitor.getCodigo() + "," + vilao.getCodigo() + "," + seguranca.gerarHash(eleitor.getCodigo() + vilao.getCodigo()) + "\n");
         writerVotos.close();
@@ -146,6 +156,8 @@ public class Eleicao {
         FileWriter writerViloes = new FileWriter("UrnaEletronica\\src\\Viloes.txt");
         writerViloes.write(lines.toString());
         writerViloes.close();
+        
+        
 
     }
 }

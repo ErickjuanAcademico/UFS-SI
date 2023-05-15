@@ -26,7 +26,17 @@ public class Sistema {
         Vilao vilao4 = new Vilao("Satanas", "333","UrnaEletronica/src/GUI/Arquivos/Satanas.png");
         Vilao vilao5 = new Vilao("DrOctopus", "777","UrnaEletronica/src/GUI/Arquivos/DrOctopus.png");
         Vilao vilao6 = new Vilao("Thanos", "999","UrnaEletronica/src/GUI/Arquivos/Thanos.png");
-        
-        Main_Screen startMain_Screen = new Main_Screen();  
+        seguranca.adicionarHashEmArquivo("UrnaEletronica\\src\\Viloes.txt", "UrnaEletronica\\src\\hashViloes.txt");
+        seguranca.adicionarHashEmArquivo("UrnaEletronica\\src\\Eleitores.txt", "UrnaEletronica\\src\\hashEleitores.txt");
+        if(seguranca.verificarHashArquivo("UrnaEletronica\\src\\Viloes.txt") && 
+           seguranca.verificarHashArquivo("UrnaEletronica\\src\\Eleitores.txt")){
+            Main_Screen startMain_Screen = new Main_Screen(); 
+
+        }
+        else{
+            System.out.println("Os dados de origem foram alterados, o programa será encerrado agora.");
+            System.exit(0);
+        }
+         
     }
 }

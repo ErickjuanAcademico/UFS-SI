@@ -42,7 +42,7 @@ public class Vilao extends Pessoa implements Serializable, iReceberVoto {
         // Escrever objeto no arquivo, se ele ainda não existe
         if (!objetoJaExiste) {
             FileWriter writer = new FileWriter("UrnaEletronica\\src\\Viloes.txt", true);
-            writer.write(nome + "," + codigo + "," + seguranca.gerarHash(getNome() + getCodigo()) + "," + votos + "," + getCaminhoImagem() + "\n");
+            writer.write(nome + "," + codigo + "," + seguranca.gerarHash(nome + codigo) + "," + votos + "," + getCaminhoImagem() + "\n");
             writer.close();
         }
     }
