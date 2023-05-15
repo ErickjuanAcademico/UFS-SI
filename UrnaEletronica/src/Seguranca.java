@@ -52,10 +52,21 @@ public class Seguranca implements iTesteDeIntegridade {
   }
     
   
-  public void verificarArquivo(){
-    
+  public boolean verificarArquivo(String caminhoArquivoVerificador, String caminhoArquivoArmazenado) {
+    boolean chaveVerificadora = false;
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader(caminhoArquivoArmazenado));
+        String hashArquivo = reader.readLine();
+        reader.close();
 
+        String hashGerada = gerarHashArquivo(caminhoArquivoVerificador);
+        chaveVerificadora = hashArquivo.equals(hashGerada);
+
+    } catch (IOException | NoSuchAlgorithmException e) {
+        e.printStackTrace();
     }
+    return chaveVerificadora;
+}
     
     public void adicionarHashEmArquivo(String caminhoDoArquivoOriginal, String caminhoDoArquivoNovo) throws IOException, NoSuchAlgorithmException {
       // Gera a hash do arquivo original
@@ -74,7 +85,7 @@ public class Seguranca implements iTesteDeIntegridade {
       escritor.close();
   }
 
-   public boolean verificarHashArquivo(String arquivoTxt) {
+   public boolean verificarHash(String arquivoTxt) {
     boolean chaveVerificadora = true;
     try {
         BufferedReader reader = new BufferedReader(new FileReader(arquivoTxt));
